@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import "./App.css";
+
 import Tasks from "./components/Tasks/Tasks";
 import AddTask from "./components/AddTask/AddTask";
+import Header from "./components/Header/Header";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -22,10 +26,48 @@ function App() {
     },
   ]);
 
+  const handleTaskAddition = (taskTitle) => {
+    if (taskTitle.length > 0) {
+      const newTasks = [
+        ...tasks,
+        {
+          id: uuidv4,
+          title: taskTitle,
+          completed: false,
+        },
+      ];
+      setTasks(newTasks);
+    }
+  };
+
+  const handleTaskCompleted = (taskId) => {
+    const newTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return {
+          ...task,
+          completed: !task.completed,
+        };
+      }
+      return task;
+    });
+
+    setTasks(newTasks);
+  };
+
+  const handleTaskRemove = (taskId) => {
+    const newTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(newTasks);
+  };
+
   return (
     <div className="container">
-      <AddTask/>
-      <Tasks tasks={tasks}/>      
+      <Header headerTitle="My tasks" />
+      <AddTask handleTaskAddition={handleTaskAddition} />
+      <Tasks
+        tasks={tasks}
+        handleTaskCompleted={handleTaskCompleted}
+        handleTaskRemove={handleTaskRemove}
+      />
     </div>
   );
 }

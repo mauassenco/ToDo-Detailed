@@ -1,11 +1,14 @@
 import Task from "../Task/Task";
 
-const Tasks = ({ tasks }) => {
+const Tasks = ({ tasks, handleTaskCompleted, handleTaskRemove }) => {
   return (
     <div>
-      <h1>TASKS</h1>
       {tasks.map((task) => (
-        <Task task={task}/>
+        <Task
+          task={task}
+          handleTaskCompleted={handleTaskCompleted}
+          handleTaskRemove={handleTaskRemove}
+        />
       ))}
     </div>
   );
