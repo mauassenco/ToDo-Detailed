@@ -11,11 +11,11 @@ const Task = ({ task, handleTaskCompleted, handleTaskRemove }) => {
       <div className="task-title" onClick={() => handleTaskCompleted(task.id)}>
         {task.title}
       </div>
-      <div
-        className="buttons-container"
-        onClick={() => handleTaskRemove(task.id)}
-      >
-        <button className="remove-task-btn">
+      <div className="buttons-container">
+        <button
+          className="remove-task-btn"
+          onClick={() => handleTaskRemove(task.id)}
+        >
           <CgClose />
         </button>
         <button className="detail-task-btn">
