@@ -11,23 +11,19 @@ import Header from "./components/Header/Header";
 import TaskDetails from "./components/TaskDetails/TaskDetails";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: "1",
-      title: "Task A",
-      completed: false,
-    },
-    {
-      id: "2",
-      title: "Task B",
-      completed: true,
-    },
-    {
-      id: "3",
-      title: "Task C",
-      completed: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const fetcHTasks = async () => {
+      const { data } = await axios.get(
+        "https://jsonplaceholder.cypress.io/todos?_limit=10"
+      );
+
+      setTasks(data);
+    };
+
+    fetcHTasks();
+  }, []);
 
   const handleTaskAddition = (taskTitle) => {
     if (taskTitle.length > 0) {

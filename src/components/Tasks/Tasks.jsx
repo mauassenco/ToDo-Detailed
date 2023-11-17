@@ -5,10 +5,10 @@ const Tasks = ({ tasks, handleTaskCompleted, handleTaskRemove }) => {
     <div>
       {tasks.map((task) => (
         <Task
+          key={task.id}
           task={task}
           handleTaskCompleted={handleTaskCompleted}
           handleTaskRemove={handleTaskRemove}
-          key={task.id}
         />
       ))}
     </div>
