@@ -8,6 +8,7 @@ const Tasks = ({ tasks, handleTaskCompleted, handleTaskRemove }) => {
           task={task}
           handleTaskCompleted={handleTaskCompleted}
           handleTaskRemove={handleTaskRemove}
+          key={task.id}
         />
       ))}
     </div>
